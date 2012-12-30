@@ -19,6 +19,7 @@ package com.alexeyhanin.intellij.jalopyplugin.component;
 
 import com.intellij.AppTopics;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManagerAdapter;
@@ -51,7 +52,12 @@ public class JalopyPluginRegistration implements ApplicationComponent {
         public void beforeDocumentSaving(@NotNull final Document document) {
             final JalopySettingsComponent settingsComponent = ApplicationManager.getApplication().getComponent(JalopySettingsComponent.class);
             if (settingsComponent != null && settingsComponent.getState().isFormatOnSaveEnabled()) {
-                com.alexeyhanin.intellij.jalopyplugin.util.JalopyDocumentFormatter.format(document);
+                CommandProcessor.getInstance().runUndoTransparentAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        com.alexeyhanin.intellij.jalopyplugin.util.JalopyDocumentFormatter.format(document);
+                    }
+                });
             }
         }
     }
