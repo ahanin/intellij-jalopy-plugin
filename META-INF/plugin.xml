@@ -1,0 +1,47 @@
+<idea-plugin version="2">
+    <id>com.alexeyhanin.intellij.jalopyplugin</id>
+    <name>Jalopy Plugin</name>
+    <version>1.0.0</version>
+    <vendor email="mail@alexeyhanin.com" url="http://github.com/ahanin">Alexey Hanin</vendor>
+
+    <description><![CDATA[
+      <h1>Jalopy Code Formatter Plugin</h1>
+
+      <p>Use Ctrl+Shift+P to format currently active document, or alternatively, enable automatic formatting on save in
+      plugin configuration.</p>
+
+      <h2>Compatibility</h2>
+      <p>Compatible with IntelliJ IDEA 12.</p>
+
+      <h2>Source Code</h2>
+      <p>Github: <a href="http://github.com/ahanin/intellij-jalopy-plugin">http://github.com/ahanin/intellij-jalopy-plugin</a></p>
+      ]]></description>
+
+    <idea-version since-build="107.105"/>
+
+    <application-components>
+        <component>
+            <implementation-class>com.alexeyhanin.intellij.jalopyplugin.component.JalopyPluginRegistration
+            </implementation-class>
+        </component>
+        <component>
+            <implementation-class>com.alexeyhanin.intellij.jalopyplugin.component.JalopySettingsComponent
+            </implementation-class>
+        </component>
+    </application-components>
+
+    <actions>
+        <action id="JalopyPlugin.FormatAction" class="com.alexeyhanin.intellij.jalopyplugin.action.FormatAction"
+                text="_Format"
+                description="Format with Jalopy">
+            <add-to-group group-id="CodeMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl P"/>
+        </action>
+        <action id="JalopyPlugin.JalopySettingsAction"
+                class="com.alexeyhanin.intellij.jalopyplugin.action.JalopySettingsAction" text="_Jalopy Settings..."
+                description="Show Jalopy Settings Dialog">
+            <add-to-group group-id="CodeMenu" anchor="after" relative-to-action="JalopyPlugin.FormatAction"/>
+        </action>
+    </actions>
+
+</idea-plugin>
