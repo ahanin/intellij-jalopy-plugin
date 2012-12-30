@@ -17,4 +17,4 @@ Compatible with IntelliJ IDEA 12.
 
 Source Code
 -----------
-Github: (http://github.com/ahanin/intellij-jalopy-plugin)[http://github.com/ahanin/intellij-jalopy-plugin]
+Github: <http://github.com/ahanin/intellij-jalopy-plugin>
