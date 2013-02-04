@@ -15,24 +15,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.alexeyhanin.intellij.jalopyplugin.action;
+package de.hunsicker.jalopy.swing;
 
-import com.alexeyhanin.intellij.jalopyplugin.swing.JalopySettingsDialogWrapper;
+import java.awt.Window;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
+/**
+ * A hackish way to instantiate package-local {@link PreviewFrame}.
+ */
+public class PreviewFrameHelper {
+    public static PreviewFrame createPreviewFrame(final Window owner) {
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-public class JalopySettingsAction extends AnAction {
-    @Override
-    public void actionPerformed(final AnActionEvent e) {
-
-        final JalopySettingsDialogWrapper settingsDialogWrapper = new JalopySettingsDialogWrapper(
-            e.getProject());
-        settingsDialogWrapper.setSize(600, 450);
-
-        settingsDialogWrapper.show();
+        return PreviewFrame.create(owner);
     }
 }

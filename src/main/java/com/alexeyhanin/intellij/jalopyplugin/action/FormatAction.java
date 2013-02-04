@@ -15,25 +15,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.alexeyhanin.intellij.jalopyplugin.action;
 
 import com.alexeyhanin.intellij.jalopyplugin.util.JalopyDocumentFormatter;
+import static com.alexeyhanin.intellij.jalopyplugin.util.RuntimeHelper.newWriteAction;
+
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.editor.Editor;
-
-import static com.alexeyhanin.intellij.jalopyplugin.util.RuntimeHelper.newWriteAction;
-
 public class FormatAction extends AnAction {
 
+
     public void actionPerformed(final AnActionEvent event) {
+
         final Editor editor = event.getData(PlatformDataKeys.EDITOR);
 
         final Runnable updateAction = newWriteAction(new EditorDocumentUpdateAction(editor));
-        CommandProcessor.getInstance().executeCommand(event.getProject(), updateAction, "jalopy.format", null);
+        CommandProcessor.getInstance()
+        .executeCommand(event.getProject(), updateAction, "jalopy.format", null);
     }
 
     private static class EditorDocumentUpdateAction implements Runnable {
@@ -46,7 +47,10 @@ public class FormatAction extends AnAction {
 
         @Override
         public void run() {
-            JalopyDocumentFormatter.format(editor.getDocument());
+
+            if (editor != null) {
+                JalopyDocumentFormatter.format(editor.getDocument());
+            }
         }
     }
 }

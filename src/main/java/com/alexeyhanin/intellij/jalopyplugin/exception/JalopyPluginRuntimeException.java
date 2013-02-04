@@ -15,24 +15,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.alexeyhanin.intellij.jalopyplugin.action;
+package com.alexeyhanin.intellij.jalopyplugin.exception;
 
-import com.alexeyhanin.intellij.jalopyplugin.swing.JalopySettingsDialogWrapper;
+public class JalopyPluginRuntimeException extends RuntimeException {
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
+    private static final long serialVersionUID = 2727349079749356932L;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+    public JalopyPluginRuntimeException(final String message) {
+        super(message);
+    }
 
-public class JalopySettingsAction extends AnAction {
-    @Override
-    public void actionPerformed(final AnActionEvent e) {
-
-        final JalopySettingsDialogWrapper settingsDialogWrapper = new JalopySettingsDialogWrapper(
-            e.getProject());
-        settingsDialogWrapper.setSize(600, 450);
-
-        settingsDialogWrapper.show();
+    public JalopyPluginRuntimeException(final String message, final Throwable cause) {
+        super(message, cause);
     }
 }

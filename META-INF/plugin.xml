@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>com.alexeyhanin.intellij.jalopyplugin</id>
     <name>Jalopy Plugin</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <vendor email="mail@alexeyhanin.com" url="http://github.com/ahanin">Alexey Hanin</vendor>
 
     <description><![CDATA[
@@ -31,17 +31,18 @@
     </application-components>
 
     <actions>
-        <action id="JalopyPlugin.FormatAction" class="com.alexeyhanin.intellij.jalopyplugin.action.FormatAction"
-                text="_Format"
-                description="Format with Jalopy">
+        <group id="JalopyPlugin.ActionGroup">
             <add-to-group group-id="CodeMenu" anchor="last"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl P"/>
-        </action>
-        <action id="JalopyPlugin.JalopySettingsAction"
-                class="com.alexeyhanin.intellij.jalopyplugin.action.JalopySettingsAction" text="_Jalopy Settings..."
-                description="Show Jalopy Settings Dialog">
-            <add-to-group group-id="CodeMenu" anchor="after" relative-to-action="JalopyPlugin.FormatAction"/>
-        </action>
+            <action id="JalopyPlugin.FormatAction" class="com.alexeyhanin.intellij.jalopyplugin.action.FormatAction"
+                    text="_Format"
+                    description="Format with Jalopy">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl P"/>
+            </action>
+            <action id="JalopyPlugin.JalopySettingsAction"
+                    class="com.alexeyhanin.intellij.jalopyplugin.action.JalopySettingsAction" text="_Jalopy Settings..."
+                    description="Show Jalopy Settings Dialog">
+            </action>
+        </group>
     </actions>
 
 </idea-plugin>
