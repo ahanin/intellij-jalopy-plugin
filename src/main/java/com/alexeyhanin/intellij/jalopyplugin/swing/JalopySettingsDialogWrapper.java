@@ -22,6 +22,7 @@ import com.alexeyhanin.intellij.jalopyplugin.exception.JalopyPluginRuntimeExcept
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 
+import de.hunsicker.jalopy.storage.Convention;
 import de.hunsicker.jalopy.swing.PreviewFrameHelper;
 import de.hunsicker.jalopy.swing.SettingsContainer;
 import de.hunsicker.jalopy.swing.ValidationException;
@@ -29,6 +30,8 @@ import de.hunsicker.jalopy.swing.ValidationException;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.GridLayout;
+
+import java.io.IOException;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -40,7 +43,6 @@ public class JalopySettingsDialogWrapper extends DialogWrapper {
     @Nullable
     @Override
     protected String getDimensionServiceKey() {
-
         return "JalopyPlugin.SettingsDialog.Dimensions";
     }
 
@@ -64,12 +66,17 @@ public class JalopySettingsDialogWrapper extends DialogWrapper {
 
     @Override
     protected void doOKAction() {
-
         try {
             settingsContainer.updateSettings();
         } catch (final ValidationException e) {
             throw new JalopyPluginRuntimeException(
                 "Unexpected exception while trying to update Jalopy settings.");
+        }
+
+        try {
+            Convention.getInstance().flush();
+        } catch (final IOException ex) {
+            throw new JalopyPluginRuntimeException("Unable to save Jalopy settings", ex);
         }
 
         super.doOKAction();

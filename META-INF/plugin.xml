@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>com.alexeyhanin.intellij.jalopyplugin</id>
     <name>Jalopy Plugin</name>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <vendor email="mail@alexeyhanin.com" url="http://github.com/ahanin">Alexey Hanin</vendor>
 
     <description><![CDATA[
